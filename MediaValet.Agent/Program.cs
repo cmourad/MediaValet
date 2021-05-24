@@ -9,6 +9,7 @@ using MediaValet.Application.Repositories;
 using MediaValet.Application.Repositories.TableEntities;
 using MediaValet.Infrastructure.Cloud.Queue;
 using MediaValet.Infrastructure.Cloud.Storage;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -18,7 +19,7 @@ namespace MediaValet.Agent
 {
   class Program
   {
-    static async Task Main(string[] args)
+    static async Task Main()
     {
       var services = new ServiceCollection();
       ConfigureServices(services);
@@ -37,7 +38,7 @@ namespace MediaValet.Agent
 
 
       services.AddOptions()
-        .AddTransient<OrdersIngestor>()
+        .AddSingleton<OrdersIngestor>()
         .AddLogging(configure => configure.AddConsole())
         .AddSingleton<IConfiguration>(configuration)
         .Configure<MessagingConfig>(configuration.GetSection(nameof(MessagingConfig)))

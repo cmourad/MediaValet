@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Azure.Storage.Queues.Models;
 using MediatR;
 using MediaValet.Application.Handlers.ConfirmationHandler.Commands;
 using MediaValet.Infrastructure.Cloud.Queue;
@@ -9,62 +10,47 @@ using Newtonsoft.Json;
 
 namespace MediaValet.Agent
 {
-  public class OrdersIngestor
+  public class OrdersIngestor : AbsrtactProcessor
   {
-    private readonly IMessagingService _messagingService;
+
     private readonly IMediator _mediator;
     private readonly ILogger<OrdersIngestor> _logger;
-    private readonly Guid _agentId;
-    private readonly int _magicNumber;
 
-    public OrdersIngestor(IMessagingService messagingService, IMediator mediator,
+    public OrdersIngestor(IMediator mediator, IMessagingService messagingService,
       ILogger<OrdersIngestor> logger)
+    : base(messagingService, logger)
     {
-      _messagingService = messagingService;
+
       _mediator = mediator;
       _logger = logger;
-      _agentId = Guid.NewGuid();
-      _magicNumber = new Random().Next(1, 10);
     }
 
-    public async Task Run()
+
+    protected override async Task<bool> Process(QueueMessage message, int magicNumber)
     {
-      _logger.LogInformation($"I'm agent {_agentId}, my magic number is  {_magicNumber}");
-      while (true)
+
+      var order = JsonConvert.DeserializeObject<Order>(message.MessageText);
+
+      _logger.LogInformation($"Received order {order.OrderId}");
+
+      if (order.RandomNumber == magicNumber)
       {
-        var message = await _messagingService.PollMessages();
-        if (message == null)
-        {
-          continue;
-        }
-
-
-        var order = JsonConvert.DeserializeObject<Order>(message.MessageText);
-        _logger.LogInformation($"Received order {order.OrderId}");
-
-        if (order.RandomNumber == _magicNumber)
-        {
-          _logger.LogInformation("Oh no, my magic number was found");
-        }
-        else
-        {
-          _logger.LogInformation($"Order text : {order.OrderText}");
-          var confirmation = new Confirmation
-          {
-            AgentId = _agentId,
-            OrderId = order.OrderId,
-            OrderStatus = "Processed"
-          };
-
-          var result = await _mediator.Send(new ConfirmationOrderCommand(confirmation));
-
-          if (result)
-          {
-            await _messagingService.Dequeue(message);
-          }
-        }
-
+        _logger.LogInformation($"Oh no, my magic number was found");
+        return false;
       }
+
+
+      _logger.LogInformation($"Order text : {order.OrderText}");
+      var confirmation = new Confirmation
+      {
+        AgentId = AgentId,
+        OrderId = order.OrderId,
+        OrderStatus = "Processed"
+      };
+
+      return await _mediator.Send(new ConfirmationOrderCommand(confirmation));
+
+
     }
   }
 }
