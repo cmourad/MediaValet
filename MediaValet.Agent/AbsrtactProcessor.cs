@@ -42,20 +42,18 @@ namespace MediaValet.Agent
           continue;
         }
 
-
-        var result = await retryPolicy.ExecuteAsync(async () =>
+        var continueExecution = await retryPolicy.ExecuteAsync(async () =>
          {
            var result = await Process(message, _magicNumber);
            if (result)
            {
              await _messagingService.Dequeue(message);
            }
-
            return result;
          });
 
 
-        if (!result)
+        if (!continueExecution)
         {
           break;
         }

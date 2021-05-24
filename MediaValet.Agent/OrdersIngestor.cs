@@ -17,10 +17,8 @@ namespace MediaValet.Agent
     private readonly ILogger<OrdersIngestor> _logger;
 
     public OrdersIngestor(IMediator mediator, IMessagingService messagingService,
-      ILogger<OrdersIngestor> logger)
-    : base(messagingService, logger)
+      ILogger<OrdersIngestor> logger) : base(messagingService, logger)
     {
-
       _mediator = mediator;
       _logger = logger;
     }
@@ -28,7 +26,6 @@ namespace MediaValet.Agent
 
     protected override async Task<bool> Process(QueueMessage message, int magicNumber)
     {
-
       var order = JsonConvert.DeserializeObject<Order>(message.MessageText);
 
       _logger.LogInformation($"Received order {order.OrderId}");
@@ -39,8 +36,8 @@ namespace MediaValet.Agent
         return false;
       }
 
-
       _logger.LogInformation($"Order text : {order.OrderText}");
+
       var confirmation = new Confirmation
       {
         AgentId = AgentId,
