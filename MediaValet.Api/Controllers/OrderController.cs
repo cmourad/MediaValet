@@ -9,10 +9,10 @@ namespace MediaValet.Api.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class SupervisorController : ControllerBase
+  public class OrderController : ControllerBase
   {
     private readonly IMediator _mediator;
-    public SupervisorController(IMediator mediator)
+    public OrderController(IMediator mediator)
     {
       _mediator = mediator;
     }
