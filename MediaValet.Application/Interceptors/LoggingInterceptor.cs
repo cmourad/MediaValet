@@ -21,15 +21,7 @@ namespace MediaValet.Application.Interceptors
     {
       //Request
       _logger.LogInformation($"Handling {typeof(TRequest).Name}");
-      Type myType = request.GetType();
-      IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
-      foreach (PropertyInfo prop in props)
-      {
-        object propValue = prop.GetValue(request, null);
-        _logger.LogInformation("{Property} : {@Value}", prop.Name, propValue);
-        // Do something with propValue
-      }
-
+      
       var response = await next();
 
       //Response

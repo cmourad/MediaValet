@@ -44,7 +44,6 @@ namespace MediaValet.Application.Tests.OrderHandlerTest
 
       result.Should().Be(expectedResult);
 
-
       _messagingMock.Verify(e=>e.Enqueue(It.Is<string>(s=>s.Contains("test"))));
       _repositoryMock.VerifyAll();
       _messagingMock.VerifyAll();
