@@ -11,7 +11,7 @@ namespace MediaValet.Application.Repositories
   public class OrdersRepository : IOrdersRepository
   {
     private readonly IStorageService<ConfirmationTableEntity> _storageService;
-    static int _incrementalNumber = 0;
+    static int _incrementalNumber;
 
     public OrdersRepository(IStorageService<ConfirmationTableEntity> storageService)
     {

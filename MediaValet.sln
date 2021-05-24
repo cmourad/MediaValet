@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaValet.Api", "MediaValet\MediaValet.Api.csproj", "{BD322244-D536-4AE0-9598-DE140FC13CC5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaValet.Application", "MediaValet.Application\MediaValet.Application.csproj", "{74B446F4-5DD6-4B07-8A3A-77A361028D10}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaValet.Infrastructure", "MediaValet.Infrastructure\MediaValet.Infrastructure.csproj", "{114CFFEB-56F9-48CA-9B7C-6C41DA4A31C7}"
@@ -15,16 +13,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaValet.Agent", "MediaVa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaValet.Application.Tests", "MediaValet.Application.Tests\MediaValet.Application.Tests.csproj", "{7FB928D1-5848-403C-9D2E-AB0E553387E4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaValet.Api", "MediaValet.Api\MediaValet.Api.csproj", "{8DA41D27-57EB-4D35-BB09-2A1A8682FB99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BD322244-D536-4AE0-9598-DE140FC13CC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD322244-D536-4AE0-9598-DE140FC13CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD322244-D536-4AE0-9598-DE140FC13CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD322244-D536-4AE0-9598-DE140FC13CC5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74B446F4-5DD6-4B07-8A3A-77A361028D10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{74B446F4-5DD6-4B07-8A3A-77A361028D10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74B446F4-5DD6-4B07-8A3A-77A361028D10}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{7FB928D1-5848-403C-9D2E-AB0E553387E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FB928D1-5848-403C-9D2E-AB0E553387E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FB928D1-5848-403C-9D2E-AB0E553387E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DA41D27-57EB-4D35-BB09-2A1A8682FB99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DA41D27-57EB-4D35-BB09-2A1A8682FB99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DA41D27-57EB-4D35-BB09-2A1A8682FB99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DA41D27-57EB-4D35-BB09-2A1A8682FB99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
